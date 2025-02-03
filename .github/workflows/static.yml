@@ -1,0 +1,119 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  - name: Cloudflare Pages GitHub Action
+  # You may pin to the exact commit or the version.
+  # uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca
+  uses: cloudflare/pages-action@v1.5.0
+  with:
+    # Cloudflare API Token
+    apiToken: 
+    # Cloudflare Account ID
+    accountId: 
+    # The name of the Pages project to upload to
+    projectName: 
+    # The directory of static assets to upload
+    directory: 
+    # GitHub Token
+    gitHubToken: # optional
+    # The name of the branch you want to deploy to
+    branch: # optional
+    # The working directory in which to run Wrangler
+    workingDirectory: # optional
+    # The version of Wrangler to use
+    wranglerVersion: # optional, default is 2
+                      - name: Cloudflare DNSLink via Cloudflare API
+  # You may pin to the exact commit or the version.
+  # uses: resourcefinance/cloudlfare-dnslink-update@043242a2e571f9c07d29fc9be7b8dafc47defa13
+  uses: resourcefinance/cloudlfare-dnslink-update@v1.2
+  with:
+    # IPFS CID
+    cid: 
+                      - name: Cloudflare Page Deploy
+  # You may pin to the exact commit or the version.
+  # uses: Cyb3r-Jak3/actions-cloudflare-pages@d8dc5f27bf1a8d005f727f5154a2af73a1d06105
+  uses: Cyb3r-Jak3/actions-cloudflare-pages@v2.0.0
+  with:
+    # The account ID your domain, which can be found in the right sidebar of your domain's overview page on the Cloudflare dashboard.
+    account: 
+    # Name of the project to deploy. The repo/account must have been authorized through the Pages UI dash before
+    project: 
+    # The email address you registered your Cloudflare account with.
+    email: # optional
+    # Your Global Cloudflare API key.
+    global_token: # optional
+    # Cloudflare API token to use
+    api_token: # optional
+                - name: Compiiile Cloudflare Pages
+  # You may pin to the exact commit or the version.
+  # uses: Akhu/compiiile-actions-cloudflare-pages@9b6c25042d74c04c46ffde295c2077a14a8a836a
+  uses: Akhu/compiiile-actions-cloudflare-pages@0.1
+          
+            - name: Cloudflare Pages Action
+  # You may pin to the exact commit or the version.
+  # uses: kitabisa/cloudflare-pages-action@fbf8507763ac4236605f030c167a16891abd7871
+  uses: kitabisa/cloudflare-pages-action@v1.0.5
+  with:
+    # Set api token
+    api-token: 
+    # Set account id
+    account-id: 
+    # Set branch
+    branch: 
+    # Set production branch
+    production-branch: 
+    # Set build directory
+    build-directory: 
+    # Set package manager
+    package-manager: 
+    # Set project name
+    project-name: 
+    # Set zone name
+    zone-name: # optional, default is 
+    # Set custom domain
+    custom-domain: # optional, default is 
+    # Set working directory
+    working-directory: # optional, default is .
+                  
+
